@@ -14,13 +14,9 @@ def main():
     # Left section - Input fields
     st.sidebar.header("Podcast RSS Feeds")
 
-    # Default podcast selection
-    default_podcast = "Music Entrepreneur Club Podcast"  # Set the default podcast name here
-
     # Dropdown box
     st.sidebar.subheader("Available Podcasts Feeds")
-    selected_podcast = st.sidebar.selectbox("Select Podcast", options=available_podcast_info.keys(),
-                                           index=0, format_func=lambda x: x if x != default_podcast else f"{x} (Default)")
+    selected_podcast = st.sidebar.selectbox("Select Podcast", options=available_podcast_info.keys())
 
     if selected_podcast:
 
