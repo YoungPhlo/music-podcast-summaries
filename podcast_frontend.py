@@ -65,7 +65,7 @@ def main():
     # User Input box
     st.sidebar.subheader("Add Your Own Podcast")
     url = st.sidebar.text_input("Link to Apple Podcast")
-    apple_podcast_link = url
+    apple_podcast = url
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
@@ -88,13 +88,13 @@ def main():
                 data = response.json()
 
                 if "results" in data and len(data["results"]) > 0:
-                    podcast_info = data["results"][0]
-                    rss_feed_url = podcast_info.get("feedUrl")
-                    return rss_feed_url
+                    podcast_json = data["results"][0]
+                    rss_feed = podcast_json.get("feedUrl")
+                    return rss_feed
 
             return None
 
-        rss_feed_url = get_rss_feed_url(apple_podcast_link)
+        rss_feed_url = get_rss_feed_url(apple_podcast)
         if rss_feed_url:
             print("RSS Feed URL:", rss_feed_url)
             url = rss_feed_url
