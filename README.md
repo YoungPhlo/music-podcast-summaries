@@ -1,4 +1,4 @@
-# music-podcast-summaries
+# podcast-preview
 Link: [https://podcast-preview.streamlit.app/](https://podcast-preview.streamlit.app/)
 
 <img src="music-pod-summaries.jpg" alt="Music Pod Summaries" height="256"/>
