@@ -30,7 +30,8 @@ def main():
 
         # Display the podcast title
         st.subheader("Episode Title")
-        st.write(podcast_info['podcast_details']['episode_title'])
+        episode_title = podcast_info.get('podcast_details', {}).get('episode_title', 'No Title Available')
+        st.write(episode_title)
 
         # Display the podcast summary and the cover image in a side-by-side layout
         col1, col2 = st.columns([7, 3])
