@@ -1,5 +1,5 @@
 # music-podcast-summaries
-Link: [https://music-podcast-summaries.streamlit.app/](https://music-podcast-summaries.streamlit.app/)
+Link: [https://podcast-preview.streamlit.app/](https://podcast-preview.streamlit.app/)
 
 <img src="music-pod-summaries.jpg" alt="Music Pod Summaries" height="256"/>
 
