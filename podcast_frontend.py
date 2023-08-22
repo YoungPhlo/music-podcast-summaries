@@ -65,16 +65,14 @@ def main():
     # User Input box
     st.sidebar.subheader("Add Your Own Podcast")
     url = st.sidebar.text_input("Link to Apple Podcast")
+    apple_podcast_link = url
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
 
     if process_button:
 
-        apple_podcast_link = url
-
         def extract_podcast_id(apple_podcast_link):
-
             # Extract the podcast ID from the Apple Podcast link using regular expression
             match = re.search(r'id(\d+)', apple_podcast_link)
             if match:
@@ -88,21 +86,20 @@ def main():
                 lookup_url = f"https://itunes.apple.com/lookup?id={podcast_id}"
                 response = requests.get(lookup_url)
                 data = response.json()
-    
+
                 if "results" in data and len(data["results"]) > 0:
                     podcast_info = data["results"][0]
                     rss_feed_url = podcast_info.get("feedUrl")
                     return rss_feed_url
-    
+
             return None
 
         rss_feed_url = get_rss_feed_url(apple_podcast_link)
         if rss_feed_url:
             print("RSS Feed URL:", rss_feed_url)
+            url = rss_feed_url
         else:
             print("RSS feed URL not found")
-
-        url = rss_feed_url
 
     # Call the function to process the URLs and retrieve podcast guest information
     podcast_info = process_podcast_info(url)
