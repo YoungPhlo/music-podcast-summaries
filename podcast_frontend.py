@@ -102,7 +102,7 @@ def main():
         else:
             print("RSS feed URL not found")
 
-    url = rss_feed_url
+        url = rss_feed_url
 
     # Call the function to process the URLs and retrieve podcast guest information
     podcast_info = process_podcast_info(url)
