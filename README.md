@@ -1,6 +1,8 @@
 # music-podcast-summaries
 Link: [https://music-podcast-summaries.streamlit.app/](https://music-podcast-summaries.streamlit.app/)
 
+![](music-podcast-summaries.jpg)
+
 Simple project to transcribe, summarize and highlight podcasts
 
 Roadmap:
