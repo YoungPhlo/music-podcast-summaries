@@ -1,7 +1,7 @@
 # music-podcast-summaries
 Link: [https://music-podcast-summaries.streamlit.app/](https://music-podcast-summaries.streamlit.app/)
 
-![](music-podcast-summaries.jpg)
+<img src="music-pod-summaries.jpg" alt="Music Pod Summaries" height="256"/>
 
 Simple project to transcribe, summarize and highlight podcasts
 
