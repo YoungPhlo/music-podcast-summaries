@@ -11,7 +11,7 @@ def download_whisper():
     whisper._download(whisper._MODELS["medium"], '/content/podcast/', False)
 
 
-stub = modal.Stub("corise-podcast-project")
+stub = modal.Stub("podcast-project")
 corise_image = modal.Image.debian_slim().pip_install(
     "feedparser",
     "https://github.com/openai/whisper/archive/9f70a352f9f8630ab3aa0d06af5cb9532bd8c21d.tar.gz",
