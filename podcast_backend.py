@@ -1,14 +1,15 @@
-import modal
-import os
-import whisper
-import feedparser
 from pathlib import Path
-import requests
+import feedparser
 import subprocess
-import re
-import openai
 import wikipedia
+import requests
+import whisper
+import openai
+import modal
 import json
+import os
+import re
+
 
 def download_whisper():
     # Load the Whisper model
