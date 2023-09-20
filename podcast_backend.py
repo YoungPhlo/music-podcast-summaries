@@ -42,8 +42,9 @@ def get_transcribe_podcast(rss_url, local_path):
     podcast_title = intelligence_feed['feed']['title']
     episode_title = intelligence_feed.entries[0]['title']
     episode_image = intelligence_feed['feed']['image'].href
+    episode_url = 'Error'
     for item in intelligence_feed.entries[0].links:
-        if (item['type'] == 'audio/mpeg'):
+        if item['type'] == 'audio/mpeg':
             episode_url = item.href
     episode_name = "full_podcast_episode.mp3"
     print("RSS URL read and episode URL: ", episode_url)
@@ -107,17 +108,16 @@ def get_transcribe_podcast(rss_url, local_path):
 
     # Return the transcribed text
     print("Podcast transcription completed, returning results...")
-    output = {}
-    output['podcast_title'] = podcast_title
-    output['episode_title'] = episode_title
-    output['episode_image'] = episode_image
-    output['episode_transcript'] = result['text']
+    output = {'podcast_title': podcast_title,
+              'episode_title': episode_title,
+              'episode_image': episode_image,
+              'episode_transcript': result['text']}
     return output
 
 
 @stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_summary(podcast_transcript):
-    instructPrompt = """
+    instruct_prompt = """
     Below is the transcript of a podcast episode. Please provide a concise yet comprehensive summary that captures the 
     main points, key discussions, and any notable insights or takeaways.
 
@@ -143,13 +143,14 @@ def get_podcast_summary(podcast_transcript):
 
     Here is the podcast transcript:
     """
-    request = instructPrompt + podcast_transcript
-    chatOutput = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
-                                              messages=[{"role": "system", "content": "You are a helpful assistant."},
-                                                        {"role": "user", "content": request}
+    request = instruct_prompt + podcast_transcript
+    chat_output = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
+                                               messages=[
+                                                   {"role": "system", "content": "You are a helpful assistant."},
+                                                   {"role": "user", "content": request}
                                                         ]
-                                              )
-    podcast_summary = chatOutput.choices[0].message.content
+                                               )
+    podcast_summary = chat_output.choices[0].message.content
     print("Podcast summary is:", podcast_summary[:500])
     return podcast_summary
 
@@ -193,7 +194,7 @@ def get_podcast_guest(podcast_transcript):
 
 @stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_highlights(podcast_transcript):
-    instructPrompt = """
+    instruct_prompt = """
     Below is the transcript of a podcast episode. Please provide 3 quotes from the transcription that stand out.
 
     How to perform this task:
@@ -206,13 +207,14 @@ def get_podcast_highlights(podcast_transcript):
     Here is the podcast transcript:
     """
 
-    request = instructPrompt + podcast_transcript
-    chatOutput = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
-                                              messages=[{"role": "system", "content": "You are a helpful assistant."},
-                                                        {"role": "user", "content": request}
+    request = instruct_prompt + podcast_transcript
+    chat_output = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
+                                               messages=[
+                                                   {"role": "system", "content": "You are a helpful assistant."},
+                                                   {"role": "user", "content": request}
                                                         ]
-                                              )
-    podcast_highlights = chatOutput.choices[0].message.content
+                                               )
+    podcast_highlights = chat_output.choices[0].message.content
     print("Podcast highlights are:", podcast_highlights)
     return podcast_highlights
 
@@ -233,7 +235,6 @@ def process_podcast(url, path):
 
 @stub.local_entrypoint()
 def test_method(url, path):
-    output = {}
     podcast_details = get_transcribe_podcast.call(url, path)
     print("Podcast Summary: ", get_podcast_summary.call(podcast_details['episode_transcript']))
     print("Podcast Guest Information: ", get_podcast_guest.call(podcast_details['episode_transcript']))
