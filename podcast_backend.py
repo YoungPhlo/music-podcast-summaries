@@ -20,7 +20,7 @@ def download_whisper():
 
 
 stub = modal.Stub("podcast-project")
-corise_image = modal.Image.debian_slim().pip_install(
+env_image = modal.Image.debian_slim().pip_install(
     "feedparser",
     "https://github.com/openai/whisper/archive/9f70a352f9f8630ab3aa0d06af5cb9532bd8c21d.tar.gz",
     "requests",
@@ -31,7 +31,7 @@ corise_image = modal.Image.debian_slim().pip_install(
     "ffmpeg-python").apt_install("ffmpeg").run_function(download_whisper)
 
 
-@stub.function(image=corise_image, gpu="any", timeout=600)
+@stub.function(image=env_image, gpu="any", timeout=600)
 def get_transcribe_podcast(rss_url, local_path):
     print("Starting Podcast Transcription Function")
     print("Feed URL: ", rss_url)
@@ -115,7 +115,7 @@ def get_transcribe_podcast(rss_url, local_path):
     return output
 
 
-@stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
+@stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_summary(podcast_transcript):
     instructPrompt = """
     Below is the transcript of a podcast episode. Please provide a concise yet comprehensive summary that captures the 
@@ -154,7 +154,7 @@ def get_podcast_summary(podcast_transcript):
     return podcast_summary
 
 
-@stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
+@stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_guest(podcast_transcript):
     request = podcast_transcript[:5000]
     completion = openai.ChatCompletion.create(
@@ -191,7 +191,7 @@ def get_podcast_guest(podcast_transcript):
     return podcast_guest
 
 
-@stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
+@stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_highlights(podcast_transcript):
     instructPrompt = """
     Below is the transcript of a podcast episode. Please provide 3 quotes from the transcription that stand out.
@@ -217,7 +217,7 @@ def get_podcast_highlights(podcast_transcript):
     return podcast_highlights
 
 
-@stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"), timeout=1200)
+@stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"), timeout=1200)
 def process_podcast(url, path):
     output = {}
     podcast_details = get_transcribe_podcast.call(url, path)
