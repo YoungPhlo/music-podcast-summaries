@@ -1,10 +1,17 @@
 import modal
-
+import os
+import whisper
+import feedparser
+from pathlib import Path
+import requests
+import subprocess
+import re
+import openai
+import wikipedia
+import json
 
 def download_whisper():
     # Load the Whisper model
-    import os
-    import whisper
     print("Download the Whisper model")
 
     # Perform download only once and save to Container storage
@@ -30,7 +37,6 @@ def get_transcribe_podcast(rss_url, local_path):
     print("Local Path:", local_path)
 
     # Read from the RSS Feed URL
-    import feedparser
     intelligence_feed = feedparser.parse(rss_url)
     podcast_title = intelligence_feed['feed']['title']
     episode_title = intelligence_feed.entries[0]['title']
@@ -42,12 +48,10 @@ def get_transcribe_podcast(rss_url, local_path):
     print("RSS URL read and episode URL: ", episode_url)
 
     # Download the podcast episode by parsing the RSS feed
-    from pathlib import Path
     p = Path(local_path)
     p.mkdir(exist_ok=True)
 
     print("Downloading the podcast episode")
-    import requests
     with requests.get(episode_url, stream=True) as r:
         r.raise_for_status()
         episode_path = p.joinpath(episode_name)
@@ -70,11 +74,9 @@ def get_transcribe_podcast(rss_url, local_path):
         '-c:a', 'copy',  # Copy the audio codec
         output_mp3  # Output file path
     ]
-    import subprocess
     subprocess.run(ffmpeg_command)
 
     # CUSTOM: Check the length of the shortened podcast_episode.mp3
-    import re
     ffprobe_command = [
         'ffprobe',  # The FFprobe executable
         '-i', output_mp3,  # Input file path
@@ -93,8 +95,6 @@ def get_transcribe_podcast(rss_url, local_path):
     episode_name = 'podcast_episode.mp3'
 
     # Load the Whisper model
-    import os
-    import whisper
 
     # Load model from saved location
     print("Load the Whisper model")
@@ -116,7 +116,6 @@ def get_transcribe_podcast(rss_url, local_path):
 
 @stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_summary(podcast_transcript):
-    import openai
     instructPrompt = """
     Below is the transcript of a podcast episode. Please provide a concise yet comprehensive summary that captures the 
     main points, key discussions, and any notable insights or takeaways.
@@ -156,9 +155,6 @@ def get_podcast_summary(podcast_transcript):
 
 @stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_guest(podcast_transcript):
-    import openai
-    import wikipedia
-    import json
     request = podcast_transcript[:5000]
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -183,7 +179,6 @@ def get_podcast_guest(podcast_transcript):
         ],
         function_call={"name": "get_podcast_host_information"}
     )
-    import json
     podcast_guest = ""
     response_message = completion["choices"][0]["message"]
     if response_message.get("function_call"):
@@ -197,7 +192,6 @@ def get_podcast_guest(podcast_transcript):
 
 @stub.function(image=corise_image, secret=modal.Secret.from_name("my-openai-secret"))
 def get_podcast_highlights(podcast_transcript):
-    import openai
     instructPrompt = """
     Below is the transcript of a podcast episode. Please provide 3 quotes from the transcription that stand out.
 
