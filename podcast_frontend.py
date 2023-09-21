@@ -1,5 +1,4 @@
 import streamlit as st
-import threading
 import requests
 import modal
 import json
@@ -98,12 +97,6 @@ def main():
 
         return None
 
-    def display_timer(empty_slot):
-        for seconds in range(300):
-            empty_slot.write(f"⏳ {seconds} seconds have passed")
-            time.sleep(1)
-        empty_slot.write("✔️ 5 minutes over!")
-
     rss_feed_url = get_rss_feed_url(apple_podcast)
     if rss_feed_url:
         print("RSS Feed URL:", rss_feed_url)
@@ -116,9 +109,25 @@ def main():
         custom_podcast.subheader('⏳ Loading...')
 
         with previewed.container():
-            # Load 5 minute timer for user
-            timer_thread = threading.Thread(target=display_timer, args=(timer_slot,))
-            timer_thread.start()
+            # Initialize session_state if not already initialized
+            if 'start_time' not in st.session_state:
+                st.session_state.start_time = None
+
+            # When the "Process" button is clicked
+            process_button = st.button("Process Podcast")
+            if process_button:
+                st.session_state.start_time = time.time()
+                # Your existing code to process the podcast, etc.
+
+            # Display the timer
+            if st.session_state.start_time is not None:
+                elapsed_time = int(time.time() - st.session_state.start_time)
+                if elapsed_time < 300:
+                    st.write(f"⏳ {elapsed_time} seconds have passed")
+                else:
+                    st.write("✔️ 5 minutes over!")
+                    st.session_state.start_time = None  # Reset the timer
+
 
             with st.spinner('Podcast processing...'):
                 # Call the function to process the URL and retrieve podcast summary
