@@ -104,9 +104,11 @@ def main():
 
     if process_button:
         # Call the function to process the URLs and retrieve podcast guest information
-        podcast_info = process_podcast_info(url)
+        with st.spinner('Podcast processing...'):
+            podcast_info = process_podcast_info(url)
+        st.success('Done!')
 
-        previewed.success('Podcast previewed.', icon="✅")
+        previewed.success('Podcast processed!', icon="✅")
 
         with custom_podcast.container():
             # Right section - Newsletter content
