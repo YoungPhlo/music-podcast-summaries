@@ -6,6 +6,10 @@ import time
 import os
 import re
 
+# Initialize session_state if not already initialized
+if 'start_time' not in st.session_state:
+    st.session_state.start_time = None
+
 
 def main():
     st.title("Podcast Dashboard")
@@ -109,15 +113,8 @@ def main():
         custom_podcast.subheader('⏳ Loading...')
 
         with previewed.container():
-            # Initialize session_state if not already initialized
-            if 'start_time' not in st.session_state:
-                st.session_state.start_time = None
-
-            # When the "Process" button is clicked
-            process_button = st.button("Process Podcast")
-            if process_button:
-                st.session_state.start_time = time.time()
-                # Your existing code to process the podcast, etc.
+            st.session_state.start_time = time.time()
+            # Your existing code to process the podcast, etc.
 
             # Display the timer
             if st.session_state.start_time is not None:
@@ -127,7 +124,6 @@ def main():
                 else:
                     st.write("✔️ 5 minutes over!")
                     st.session_state.start_time = None  # Reset the timer
-
 
             with st.spinner('Podcast processing...'):
                 # Call the function to process the URL and retrieve podcast summary
