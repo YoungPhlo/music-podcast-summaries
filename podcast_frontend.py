@@ -9,15 +9,6 @@ import re
 def main():
     st.title("Podcast Dashboard")
 
-    # custom_header = st.empty()
-    # custom_subheader = st.empty()
-    # custom_title = st.empty()
-    # custom_columns = st.empty()
-    # custom_header_summary = st.empty()
-    # custom_summary = st.empty()
-    # custom_image = st.empty()
-    # custom_header_moments = st.empty()
-    # custom_moments = st.empty()
     custom_podcast = st.empty()
 
     available_podcast_info = create_dict_from_json_files('.')
@@ -80,6 +71,7 @@ def main():
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
+    previewed = st.empty()
 
     def extract_podcast_id(apple_podcast_link):
         # Extract the podcast ID from the Apple Podcast link using regular expression
@@ -113,6 +105,8 @@ def main():
     if process_button:
         # Call the function to process the URLs and retrieve podcast guest information
         podcast_info = process_podcast_info(url)
+
+        previewed.success('Podcast previewed.', icon="✅")
 
         with custom_podcast.container():
             # Right section - Newsletter content
