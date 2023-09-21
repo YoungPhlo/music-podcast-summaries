@@ -72,7 +72,6 @@ def main():
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
-    timer_slot = st.sidebar.empty()
     previewed = st.sidebar.empty()
 
     def extract_podcast_id(apple_podcast_link):
@@ -108,22 +107,7 @@ def main():
         # Loading indicators to show the podcast is being processed
         custom_podcast.subheader('⏳ Loading...')
 
-        # Initialize session_state if not already initialized
-        if 'start_time' not in st.session_state:
-            st.session_state.start_time = None
-
-        st.session_state.start_time = time.time()
-
         with previewed.container():
-            # Display the timer
-            if st.session_state.start_time is not None:
-                elapsed_time = int(time.time() - st.session_state.start_time)
-                if elapsed_time < 300:
-                    st.write(f"⏳ {elapsed_time} seconds have passed")
-                else:
-                    st.write("✔️ 5 minutes over!")
-                    st.session_state.start_time = None  # Reset the timer
-
             with st.spinner('Podcast processing...'):
                 # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(url)
