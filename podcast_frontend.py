@@ -116,10 +116,11 @@ def main():
         custom_podcast.subheader('⏳ Loading...')
 
         with previewed.container():
-            with st.spinner('Podcast processing...'):
-                timer_thread = threading.Thread(target=display_timer, args=(timer_slot,))
-                timer_thread.start()
+            # Load 5 minute timer for user
+            timer_thread = threading.Thread(target=display_timer, args=(timer_slot,))
+            timer_thread.start()
 
+            with st.spinner('Podcast processing...'):
                 # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(url)
 
