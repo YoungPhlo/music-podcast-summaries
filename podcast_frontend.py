@@ -105,9 +105,11 @@ def main():
     if process_button:
         # Loading icons to show the podcast is being processed
         previewed.write('Loading...')
-        with custom_podcast.spinner('Podcast processing...'):
-            # Call the function to process the URLs and retrieve podcast guest information
-            podcast_info = process_podcast_info(url)
+        with custom_podcast.container():
+            with st.spinner('Podcast processing...'):
+                # Call the function to process the URLs and retrieve podcast guest information
+                podcast_info = process_podcast_info(url)
+
         previewed.success('Podcast processed!', icon="✅")
 
         with custom_podcast.container():
