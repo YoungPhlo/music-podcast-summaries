@@ -136,10 +136,10 @@ def main():
         #     st.write(podcast_info["podcast_guest"]['summary'])
     
         # Display the five key moments
-        st.subheader("Key Moments")
+        custom_podcast.subheader("Key Moments")
         key_moments = podcast_info['podcast_highlights']
         for moment in key_moments.split('\n'):
-            st.markdown(
+            custom_podcast.markdown(
                 f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
 
 
