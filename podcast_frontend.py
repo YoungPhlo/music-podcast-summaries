@@ -113,7 +113,7 @@ def main():
                 podcast_info = process_podcast_info(url)
 
         previewed.success('Podcast processed!', icon="✅")
-        st.snow()
+        st.balloons()
 
         with custom_podcast.container():
             # Right section - Newsletter content
