@@ -104,18 +104,17 @@ def main():
     else:
         print("RSS feed URL not found")
 
-    # Initialize session_state if not already initialized
-    if 'start_time' not in st.session_state:
-        st.session_state.start_time = None
-
     if process_button:
         # Loading indicators to show the podcast is being processed
         custom_podcast.subheader('⏳ Loading...')
 
-        with previewed.container():
-            st.session_state.start_time = time.time()
-            # Your existing code to process the podcast, etc.
+        # Initialize session_state if not already initialized
+        if 'start_time' not in st.session_state:
+            st.session_state.start_time = None
 
+        st.session_state.start_time = time.time()
+
+        with previewed.container():
             # Display the timer
             if st.session_state.start_time is not None:
                 elapsed_time = int(time.time() - st.session_state.start_time)
