@@ -6,10 +6,6 @@ import time
 import os
 import re
 
-# Initialize session_state if not already initialized
-if 'start_time' not in st.session_state:
-    st.session_state.start_time = None
-
 
 def main():
     st.title("Podcast Dashboard")
@@ -107,6 +103,10 @@ def main():
         url = rss_feed_url
     else:
         print("RSS feed URL not found")
+
+    # Initialize session_state if not already initialized
+    if 'start_time' not in st.session_state:
+        st.session_state.start_time = None
 
     if process_button:
         # Loading indicators to show the podcast is being processed
