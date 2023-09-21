@@ -104,18 +104,16 @@ def main():
         print("RSS feed URL not found")
 
     if process_button:
-        # Loading icons to show the podcast is being processed
-        previewed.write('Loading...')
-        with custom_podcast.container():
+        # Loading indicators to show the podcast is being processed
+        custom_podcast.subheader('⏳ Loading...')
+
+        with previewed.container():
             with st.spinner('Podcast processing...'):
-                # Call the function to process the URL and retrieve podcast guest information
+                # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(url)
-                with st.sidebar.empty():
-                    for seconds in range(200):
-                        st.write(f"⏳ {seconds} seconds have passed")
-                        time.sleep(1)
 
         previewed.success('Podcast processed!', icon="✅")
+        st.snow()
 
         with custom_podcast.container():
             # Right section - Newsletter content
