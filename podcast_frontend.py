@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import modal
 import json
+import time
 import os
 import re
 
@@ -71,7 +72,7 @@ def main():
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
-    previewed = st.empty()
+    previewed = st.sidebar.empty()
 
     def extract_podcast_id(apple_podcast_link):
         # Extract the podcast ID from the Apple Podcast link using regular expression
@@ -107,8 +108,12 @@ def main():
         previewed.write('Loading...')
         with custom_podcast.container():
             with st.spinner('Podcast processing...'):
-                # Call the function to process the URLs and retrieve podcast guest information
+                # Call the function to process the URL and retrieve podcast guest information
                 podcast_info = process_podcast_info(url)
+                with st.sidebar.empty():
+                    for seconds in range(200):
+                        st.write(f"⏳ {seconds} seconds have passed")
+                        time.sleep(1)
 
         previewed.success('Podcast processed!', icon="✅")
 
