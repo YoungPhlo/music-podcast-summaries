@@ -9,6 +9,8 @@ import re
 def main():
     st.title("Podcast Dashboard")
 
+    custom_podcast = st.empty()
+
     available_podcast_info = create_dict_from_json_files('.')
 
     # Logo
@@ -27,8 +29,6 @@ def main():
 
         # Right section - Newsletter content
         st.header("Newsletter Content")
-
-        custom_podcast = st.empty()
 
         # Display the podcast title
         st.subheader("Episode Title")
