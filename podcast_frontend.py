@@ -1,4 +1,5 @@
 import streamlit as st
+import threading
 import requests
 import modal
 import json
@@ -72,6 +73,7 @@ def main():
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
+    timer_slot = st.sidebar.empty()
     previewed = st.sidebar.empty()
 
     def extract_podcast_id(apple_podcast_link):
@@ -96,6 +98,12 @@ def main():
 
         return None
 
+    def display_timer(empty_slot):
+        for seconds in range(300):
+            empty_slot.write(f"⏳ {seconds} seconds have passed")
+            time.sleep(1)
+        empty_slot.write("✔️ 5 minutes over!")
+
     rss_feed_url = get_rss_feed_url(apple_podcast)
     if rss_feed_url:
         print("RSS Feed URL:", rss_feed_url)
@@ -109,6 +117,9 @@ def main():
 
         with previewed.container():
             with st.spinner('Podcast processing...'):
+                timer_thread = threading.Thread(target=display_timer, args=(timer_slot,))
+                timer_thread.start()
+
                 # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(url)
 
