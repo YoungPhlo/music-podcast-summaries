@@ -103,11 +103,11 @@ def main():
         print("RSS feed URL not found")
 
     if process_button:
-        # Call the function to process the URLs and retrieve podcast guest information
-        with st.spinner('Podcast processing...'):
+        # Loading icons to show the podcast is being processed
+        previewed.write('Loading...')
+        with custom_podcast.spinner('Podcast processing...'):
+            # Call the function to process the URLs and retrieve podcast guest information
             podcast_info = process_podcast_info(url)
-        st.success('Done!')
-
         previewed.success('Podcast processed!', icon="✅")
 
         with custom_podcast.container():
