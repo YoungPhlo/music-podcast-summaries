@@ -41,7 +41,6 @@ def podcast_info(apple_podcast_link):
         return mp3_file
 
 
-<<<<<<< HEAD
 def anti_regex(apple_podcast_link):
     # Function to find next occurrence of non-digit character position
     def find_next_non_digit_pos(s, start):
@@ -63,7 +62,5 @@ def anti_regex(apple_podcast_link):
     episode_id = apple_podcast_link[start_episode_id:end_episode_id]
 
 
-=======
->>>>>>> 9ab52a9 (added scratch files used to work through issues)
 with_ep = podcast_info(sample_episode_url)
 print(with_ep)
