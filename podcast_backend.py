@@ -112,6 +112,8 @@ def get_transcribe_podcast(apple_link, local_path):
             for link in entry['links']:
                 if link['type'] == 'audio/mpeg' and link['href'] == mp3_url:
                     entry_idx = i
+                elif link['type'] == 'audio/x-m4a' and link['href'] == mp3_url:
+                    entry_idx = i
 
     else:
         parsed_rss = feedparser.parse(rss_feed)
@@ -126,8 +128,10 @@ def get_transcribe_podcast(apple_link, local_path):
     for item in parsed_rss.entries[entry_idx].links:
         if item['type'] == 'audio/mpeg':
             episode_mp3 = item.href
+        elif item['type'] == 'audio/x-m4a':
+            episode_mp3 = item.href
     episode_name = "full_podcast_episode.mp3"
-    print("RSS URL read and episode URL: ", episode_mp3)
+    print("Episode URL: ", episode_mp3)
 
     # Download the podcast episode by parsing the RSS feed
     p = Path(local_path)
