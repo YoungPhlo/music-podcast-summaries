@@ -83,7 +83,7 @@ def main():
                 # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(apple_podcast)
 
-            previewed.success('Podcast processed!', icon="✅")
+        previewed.success('Podcast processed!', icon="✅")
         st.balloons()
 
         with custom_podcast.container():
