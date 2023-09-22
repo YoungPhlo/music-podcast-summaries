@@ -74,35 +74,6 @@ def main():
     st.sidebar.markdown("**Note**: Podcast processing can take up to 5 minutes, please be patient.")
     previewed = st.sidebar.empty()
 
-    def extract_podcast_id(apple_podcast_link):
-        # Extract the podcast ID from the Apple Podcast link using regular expression
-        match = re.search(r'id(\d+)', apple_podcast_link)
-        if match:
-            return match.group(1)
-        return None
-
-    def get_rss_feed_url(apple_podcast_link):
-        podcast_id = extract_podcast_id(apple_podcast_link)
-
-        if podcast_id:
-            lookup_url = f"https://itunes.apple.com/lookup?id={podcast_id}"
-            response = requests.get(lookup_url)
-            data = response.json()
-
-            if "results" in data and len(data["results"]) > 0:
-                podcast_json = data["results"][0]
-                rss_feed = podcast_json.get("feedUrl")
-                return rss_feed
-
-        return None
-
-    rss_feed_url = get_rss_feed_url(apple_podcast)
-    if rss_feed_url:
-        print("RSS Feed URL:", rss_feed_url)
-        url = rss_feed_url
-    else:
-        print("RSS feed URL not found")
-
     if process_button:
         # Loading indicators to show the podcast is being processed
         custom_podcast.subheader('⏳ Loading...')
@@ -110,7 +81,7 @@ def main():
         with previewed.container():
             with st.spinner('Podcast processing...'):
                 # Call the function to process the URL and retrieve podcast summary
-                podcast_info = process_podcast_info(url)
+                podcast_info = process_podcast_info(apple_podcast)
 
         previewed.success('Podcast processed!', icon="✅")
         st.balloons()
