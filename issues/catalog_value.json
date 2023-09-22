@@ -1,0 +1,126 @@
+{
+    "x": 1695352698870,
+    "d": [
+        {
+            "id": "1000626225028",
+            "type": "podcast-episodes",
+            "href": "/v1/catalog/us/podcast-episodes/1000626225028?l=en-US",
+            "attributes": {
+                "offers": [
+                    {
+                        "kind": "get",
+                        "type": "STDQ"
+                    }
+                ],
+                "copyright": "Latent.Space",
+                "contentAdvisory": "",
+                "artworkOrigin": "podcast",
+                "genreNames": [
+                    "Technology"
+                ],
+                "kind": "full",
+                "mediaKind": "audio",
+                "description": {
+                    "standard": "The AI Engineer Summit Expo has been announced, presented by AutoGPT (and future guest Toran Bruce-Richards!) Stay tuned for more updates on the Summit livestream and Latent Space University.\nThis post was on HN for 10 hours.\nWhat comes after the Transformer? This is one of the Top 10 Open Challenges in LLM Research that has been the talk of the AI community this month. Jon Frankle (friend of the show!) has an ongoing bet with Sasha Rush on whether Attention is All You Need, and the most significant challenger to emerge this year has been RWKV - Receptance Weighted Key Value models, which revive the RNN for GPT-class LLMs, inspired by a 2021 paper on Attention Free Transformers from Apple (surprise!).\nWhat this means practically is that RWKV models tend to scale in all directions (both in training and inference) much better than Transformers-based open source models:\nWhile remaining competitive on standard reasoning benchmarks:\nswyx was recently in Singapore for meetings with AI government and industry folks, and grabbed 2 hours with RWKV committee member Eugene Cheah for a deep dive, the full recording of which is now up on Latent Space TV:\nToday we release both the 2hr video and an edited 1hr audio version, to cater to the different audiences and provide âablation opportunitiesâ on RWKV interest level.\n\nThe Eleuther Mafia?\nThe RWKV project is notable not merely because of the credible challenge to the Transformers dominance. It is also a distributed, international, mostly uncredentialed community reminiscent of early 2020s Eleuther AI:\n* Primarily Discord, pseudonymous, GPU-poor volunteer community somehow coordinating enough to train >10B, OPT/BLOOM-competitive models\n* Being driven by the needs of its community, it is extremely polyglot (e.g. English, Chinese, Japanese, Arabic) not because it needs to beat some benchmarks, but because its users want it to be for their own needs.\n* âOpen Sourceâ in both the good and the bad way - properly Apache 2.0 licensed (not âopen but restrictedâ), yet trained on data taken from commercially compromised sources like the Pile (where Shawn Presserâs Books3 dataset has been recently taken down) and Alpaca (taking from Steven Teyâs ShareGPT which is technically against OpenAI TOS)\nThe threadboi class has loved tracking the diffusion of Transformers paper authors out into the industry:\nBut perhaps the underdog version of this is tracking the emerging Eleuther AI mafia:\nIt will be fascinating to see how both Eleuther and Eleuther alums fare as they build out the future of both LLMs and open source AI.\n\nAudio Version Timestamps\nassisted by smol-podcaster. Different timestamps vs the 2hr YouTube\n* [00:05:35] Eugene's path into AI at UIlicious\n* [00:07:33] Tokenizer penalty and data efficiency of Transformers\n* [00:08:02] Using Salesforce CodeGen\n* [00:10:17] The limitations of Transformers for handling large context sizes\n* [00:13:17] RWKV compute costs compared to Transformers\n* [00:16:06] How Eugene found RWKV early\n* [00:18:52] RWKV's focus on supporting many languages, not just English\n* [00:21:24] Using the RWKV model for fine-tuning for specific languages\n* [00:24:45] What is RWKV?\n* [00:33:46] Overview of the different RWKV models like World, Raven, Novel\n* [00:41:34] Background of Blink, the creator of RWKV\n* [00:49:55] The linear vs quadratic scaling of RWKV vs Transformers\n* [00:53:29] RWKV matching Transformer performance on reasoning tasks\n* [00:54:31] The community's lack of marketing for RWKV\n* [00:57:00] The English-language bias in AI models\n* [01:00:33] Plans to improve RWKV's memory and context handling\n* [01:03:10] Advice for AI engineers wanting to get more technical knowledge\n\nShow Notes\nCompanies/Organizations:\n* RWKV - HF blog, paper, docs, GitHub, Huggingface\n* Raven 14B (finetuned on Alpaca+ShareGPT+...) Demo\n* World 7B (supports 100+ world languages) Demo\n* How RWKV works in 100 LOC, RWKV overview\n* EleutherAI - Decentralized open source AI research",
+                    "short": ""
+                },
+                "artwork": {
+                    "width": 1400,
+                    "height": 1400,
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/97/39/d6/9739d6fc-d55e-483b-c8fd-66764254ab1d/mza_11445832196745209483.jpg/{w}x{h}bb.{f}",
+                    "bgColor": "291a28",
+                    "textColor1": "fffdfe",
+                    "textColor2": "f6baab",
+                    "textColor3": "d4cfd3",
+                    "textColor4": "cd9a91"
+                },
+                "url": "https://podcasts.apple.com/us/podcast/rwkv-reinventing-rnns-for-the-transformer-era-with/id1674008350?i=1000626225028",
+                "releaseDateTime": "2023-08-30T16:04:19Z",
+                "websiteUrl": "https://www.latent.space/p/rwkv",
+                "durationInMilliseconds": 4331000,
+                "name": "RWKV: Reinventing RNNs for the Transformer Era â with Eugene Cheah of UIlicious",
+                "guid": "substack:post:136547662",
+                "contentRating": "clean",
+                "artistName": "Eugene Cheah",
+                "subscribable": true,
+                "assetUrl": "https://api.substack.com/feed/podcast/136547662/4b893a10da528ef7318f1037387882c7.mp3"
+            },
+            "relationships": {
+                "podcast": {
+                    "href": "/v1/catalog/us/podcast-episodes/1000626225028/podcast?l=en-US",
+                    "data": [
+                        {
+                            "id": "1674008350",
+                            "type": "podcasts",
+                            "href": "/v1/catalog/us/podcasts/1674008350?l=en-US",
+                            "attributes": {
+                                "offers": [
+                                    {
+                                        "kind": "get",
+                                        "type": "STDQ"
+                                    }
+                                ],
+                                "copyright": "Â© Latent.Space",
+                                "genreNames": [
+                                    "Technology",
+                                    "Podcasts",
+                                    "Business",
+                                    "Entrepreneurship"
+                                ],
+                                "releaseFrequency": "Updated Weekly",
+                                "kind": "episodic",
+                                "seasonNumbers": [],
+                                "description": {
+                                    "standard": "The podcast by and for AI Engineers! We are the first place over 50k developers hear news and interviews about Software 3.0 - Foundation Models changing every domain in Code Generation, Computer Vision, AI Agents, and more, directly from the founders, builders, and thinkers involved in pushing the cutting edge. Striving to give you both the definitive take on the Current Thing down to the first introduction to the tech you'll be using in the next 3 months! We break news and exclusive interviews from tiny (George Hotz), Databricks, Glean, Replit, Roboflow, MosaicML, UC Berkeley, OpenAI, and more. \n\nwww.latent.space"
+                                },
+                                "languageTag": "en-US",
+                                "artwork": {
+                                    "width": 1400,
+                                    "height": 1400,
+                                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/97/39/d6/9739d6fc-d55e-483b-c8fd-66764254ab1d/mza_11445832196745209483.jpg/{w}x{h}bb.{f}",
+                                    "bgColor": "291a28",
+                                    "textColor1": "fffdfe",
+                                    "textColor2": "f6baab",
+                                    "textColor3": "d4cfd3",
+                                    "textColor4": "cd9a91"
+                                },
+                                "completed": false,
+                                "url": "https://podcasts.apple.com/us/podcast/latent-space-the-ai-engineer-podcast-codegen-agents/id1674008350",
+                                "releaseDateTime": "2023-09-20T17:10:00Z",
+                                "trackCount": 33,
+                                "displayType": "free",
+                                "createdDate": "2023-02-23",
+                                "websiteUrl": "https://www.latent.space/podcast",
+                                "name": "Latent Space: The AI Engineer Podcast â CodeGen, Agents, Computer Vision, Data Science, AI UX and all things Software 3.0",
+                                "contentRating": "clean",
+                                "artistName": "Alessio + swyx",
+                                "subscribable": true,
+                                "subscriptionUrl": "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/subscribePodcast?cc=us&id=1674008350"
+                            }
+                        }
+                    ]
+                },
+                "artists": {
+                    "href": "/v1/catalog/us/podcast-episodes/1000626225028/artists?l=en-US",
+                    "data": []
+                },
+                "genres": {
+                    "href": "/v1/catalog/us/podcast-episodes/1000626225028/genres?l=en-US",
+                    "data": [
+                        {
+                            "id": "1318",
+                            "type": "genres",
+                            "href": "/v1/catalog/us/genres/1318?l=en-US",
+                            "attributes": {
+                                "parentName": "Podcasts",
+                                "name": "Technology",
+                                "parentId": "26",
+                                "url": "https://itunes.apple.com/us/genre/id1318"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
