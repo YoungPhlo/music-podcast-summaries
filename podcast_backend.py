@@ -306,10 +306,10 @@ def get_podcast_highlights(podcast_transcript):
 @stub.function(image=env_image, secret=modal.Secret.from_name("my-openai-secret"), timeout=1200)
 def process_podcast(url, path):
     output = {}
-    podcast_details = get_transcribe_podcast.call(url, path)
-    podcast_summary = get_podcast_summary.call(podcast_details['episode_transcript'])
-    podcast_guest = get_podcast_guest.call(podcast_details['episode_transcript'])
-    podcast_highlights = get_podcast_highlights.call(podcast_details['episode_transcript'])
+    podcast_details = get_transcribe_podcast.remote(url, path)
+    podcast_summary = get_podcast_summary.remote(podcast_details['episode_transcript'])
+    podcast_guest = get_podcast_guest.remote(podcast_details['episode_transcript'])
+    podcast_highlights = get_podcast_highlights.remote(podcast_details['episode_transcript'])
     output['podcast_details'] = podcast_details
     output['podcast_summary'] = podcast_summary
     output['podcast_guest'] = podcast_guest
@@ -319,7 +319,7 @@ def process_podcast(url, path):
 
 @stub.local_entrypoint()
 def test_method(url, path):
-    podcast_details = get_transcribe_podcast.call(url, path)
-    print("Podcast Summary: ", get_podcast_summary.call(podcast_details['episode_transcript']))
-    print("Podcast Guest Information: ", get_podcast_guest.call(podcast_details['episode_transcript']))
-    print("Podcast Highlights: ", get_podcast_highlights.call(podcast_details['episode_transcript']))
+    podcast_details = get_transcribe_podcast.remote(url, path)
+    print("Podcast Summary: ", get_podcast_summary.remote(podcast_details['episode_transcript']))
+    print("Podcast Guest Information: ", get_podcast_guest.remote(podcast_details['episode_transcript']))
+    print("Podcast Highlights: ", get_podcast_highlights.remote(podcast_details['episode_transcript']))
