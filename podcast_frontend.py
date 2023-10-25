@@ -83,9 +83,6 @@ def main():
                 # Call the function to process the URL and retrieve podcast summary
                 podcast_info = process_podcast_info(apple_podcast)
 
-        st.write("Debug - podcast_info:", podcast_info)  # Debug Step 1
-        custom_podcast.write("Debug - Processing complete.")  # Debug Step 2
-
         previewed.success('Podcast processed!', icon="✅")
         st.balloons()
 
